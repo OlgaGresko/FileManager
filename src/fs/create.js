@@ -1,5 +1,13 @@
-const create = async () => {
-    // Write your code here 
+import { writeFile } from 'fs/promises';
+import { join } from 'path';
+import throwErrorMessage from '../utils/throwErrorMassage.js';
+
+const create = async (name) => {
+    try {
+        await writeFile(join(process.cwd(), name), '', { flag: 'wx' });
+    } catch {
+        throwErrorMessage();
+    }
 };
 
-await create();
+export default create;

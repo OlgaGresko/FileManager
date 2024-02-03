@@ -5,6 +5,7 @@ import { dirname, join, resolve } from "path";
 import parseEnv from "./cli/env.js";
 import list from "./fs/list.js";
 import read from "./streams/read.js";
+import create from "./fs/create.js";
 import capitalizeFirstLetter from "./utils/capitalizeFirstLetter.js";
 import showCurrentWorkingDirectory from "./utils/printCurrentWorkingDirectory.js";
 
@@ -61,6 +62,9 @@ rl.on("line", async line => {
         const newPath = join(process.cwd(), arg);
         read(newPath);
       }
+    } else if (line.trim().startsWith("add ")) {
+      const [_, arg] = line.trim().split(" ");
+      create(arg);
     } 
     else if (line.trim() === ".exit") {
       rl.close();
