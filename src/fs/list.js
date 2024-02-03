@@ -22,7 +22,6 @@ const list = async () => {
     } else if (a.type !== "file" && b.type === "file") {
       return 1;
     }
-    return a.name.localeCompare(b.name);
   });
 
   console.table(sortedFiles);

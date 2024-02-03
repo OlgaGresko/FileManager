@@ -4,6 +4,7 @@ import { dirname, join, resolve } from "path";
 
 import parseEnv from "./cli/env.js";
 import list from "./fs/list.js";
+import read from "./streams/read.js";
 import capitalizeFirstLetter from "./utils/capitalizeFirstLetter.js";
 import showCurrentWorkingDirectory from "./utils/printCurrentWorkingDirectory.js";
 
@@ -36,7 +37,7 @@ rl.on("line", async line => {
       } else {
         process.chdir(parentDirectory);
       }
-    } else if (line.trim().startsWith("cd")) {
+    } else if (line.trim().startsWith("cd ")) {
       const [_, arg] = line.trim().split(" ");
 
       if (arg.includes("/") || arg.includes("\\")) {
@@ -49,7 +50,19 @@ rl.on("line", async line => {
       }
     } else if (line.trim() === "ls") {
       await list();
-    } else if (line.trim() === ".exit") {
+    } else if (line.trim().startsWith("cat ")) {
+      const [_, arg] = line.trim().split(" ");
+
+      if (arg.includes("/") || arg.includes("\\")) {
+        const partsOfPath = arg.split(/[\/\\]/);
+        const newPath = join(...partsOfPath);
+        read(newPath);
+      } else {
+        const newPath = join(process.cwd(), arg);
+        read(newPath);
+      }
+    } 
+    else if (line.trim() === ".exit") {
       rl.close();
     } else {
       console.log("Invalid input");
