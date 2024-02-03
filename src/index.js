@@ -6,6 +6,7 @@ import parseEnv from "./cli/env.js";
 import list from "./fs/list.js";
 import read from "./streams/read.js";
 import create from "./fs/create.js";
+import rename from "./fs/rename.js";
 import capitalizeFirstLetter from "./utils/capitalizeFirstLetter.js";
 import showCurrentWorkingDirectory from "./utils/printCurrentWorkingDirectory.js";
 
@@ -65,8 +66,18 @@ rl.on("line", async line => {
     } else if (line.trim().startsWith("add ")) {
       const [_, arg] = line.trim().split(" ");
       create(arg);
-    } 
-    else if (line.trim() === ".exit") {
+    } else if (line.trim().startsWith("rn ")) {
+      const [_, arg1, arg2] = line.trim().split(" ");
+
+      if (arg1.includes("/") || arg1.includes("\\")) {
+        const partsOfPath = arg1.split(/[\/\\]/);
+        const newPath = join(...partsOfPath);
+        rename(newPath, arg2);
+      } else {
+        const newPath = join(process.cwd(), arg1);
+        rename(newPath, arg2);
+      }
+    } else if (line.trim() === ".exit") {
       rl.close();
     } else {
       console.log("Invalid input");
