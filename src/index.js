@@ -36,7 +36,16 @@ rl.on("line", (line) => {
            process.chdir(parentDirectory); 
         }
         
-    } else if (line.trim() === ".exit") {
+    } else if (line.trim().startsWith("cd")) {
+      const [command, arg] = line.trim().split(' ');
+  
+      if (arg.toLowerCase().startsWith("c:/")) {
+        process.chdir(arg);
+      } else {
+        const newPath = join(process.cwd(), arg);
+        process.chdir(newPath);
+      }
+    }    else if (line.trim() === ".exit") {
       rl.close();
     } else {
       console.log("Invalid input");
