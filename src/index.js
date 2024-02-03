@@ -7,6 +7,7 @@ import list from "./fs/list.js";
 import read from "./streams/read.js";
 import create from "./fs/create.js";
 import rename from "./fs/rename.js";
+import copy from "./fs/copy.js";
 import capitalizeFirstLetter from "./utils/capitalizeFirstLetter.js";
 import showCurrentWorkingDirectory from "./utils/printCurrentWorkingDirectory.js";
 
@@ -77,6 +78,9 @@ rl.on("line", async line => {
         const newPath = join(process.cwd(), arg1);
         rename(newPath, arg2);
       }
+    } else if (line.trim().startsWith("cp ")) {
+      const [_, arg1, arg2] = line.trim().split(" ");
+        copy(arg1, arg2);
     } else if (line.trim() === ".exit") {
       rl.close();
     } else {
