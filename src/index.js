@@ -1,4 +1,5 @@
 import readline from "readline/promises";
+import os from "os";
 // import { fileURLToPath } from "url";
 import { dirname, join, resolve } from "path";
 
@@ -9,7 +10,7 @@ import create from "./fs/create.js";
 import rename from "./fs/rename.js";
 import copy from "./fs/copy.js";
 import move from "./fs/move.js";
-import remove from "./fs/delete.js"; 
+import remove from "./fs/delete.js";
 import capitalizeFirstLetter from "./utils/capitalizeFirstLetter.js";
 import showCurrentWorkingDirectory from "./utils/printCurrentWorkingDirectory.js";
 
@@ -31,7 +32,7 @@ if (homeDir) {
   showCurrentWorkingDirectory();
 }
 
-rl.on("line", async line => {
+rl.on("line", async (line) => {
   try {
     if (line.trim() === "up") {
       const currentDir = process.cwd();
@@ -71,7 +72,6 @@ rl.on("line", async line => {
       create(arg);
     } else if (line.trim().startsWith("rn ")) {
       const [_, arg1, arg2] = line.trim().split(" ");
-
       if (arg1.includes("/") || arg1.includes("\\")) {
         const partsOfPath = arg1.split(/[\/\\]/);
         const newPath = join(...partsOfPath);
@@ -82,13 +82,34 @@ rl.on("line", async line => {
       }
     } else if (line.trim().startsWith("cp ")) {
       const [_, arg1, arg2] = line.trim().split(" ");
-        copy(arg1, arg2);
+      copy(arg1, arg2);
     } else if (line.trim().startsWith("mv ")) {
       const [_, arg1, arg2] = line.trim().split(" ");
-        move(arg1, arg2);
+      move(arg1, arg2);
     } else if (line.trim().startsWith("rm ")) {
       const [_, arg] = line.trim().split(" ");
-        remove(arg);
+      remove(arg);
+    } else if (line.trim().startsWith("os ")) {
+      const [_, arg] = line.trim().split(" ");
+      const clearedArg = arg.replace("--", "");
+
+      if (clearedArg === "EOL") {
+        console.log(os.EOL);
+      } else if (clearedArg === "cpus") {
+        const allCpus = os.cpus();
+        console.log(`Overall amount of CPUS is ${allCpus.length}`);
+        allCpus.map((cpu, index) => {
+          console.log(`${index + 1}. CPU model is ${cpu.model}, clock rate (in GHz) is ${cpu.speed / 1000}`)
+        })
+      } else if (clearedArg === "homedir") {
+        console.log(os.homedir());
+      } else if (clearedArg === "username") {
+        const info = os.userInfo();
+        console.log(info.username);
+      } else if (clearedArg === "architecture") {
+        console.log(os.arch());
+      }
+
     } else if (line.trim() === ".exit") {
       rl.close();
     } else {
