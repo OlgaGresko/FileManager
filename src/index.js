@@ -8,6 +8,7 @@ import read from "./streams/read.js";
 import create from "./fs/create.js";
 import rename from "./fs/rename.js";
 import copy from "./fs/copy.js";
+import move from "./fs/move.js";
 import capitalizeFirstLetter from "./utils/capitalizeFirstLetter.js";
 import showCurrentWorkingDirectory from "./utils/printCurrentWorkingDirectory.js";
 
@@ -81,6 +82,9 @@ rl.on("line", async line => {
     } else if (line.trim().startsWith("cp ")) {
       const [_, arg1, arg2] = line.trim().split(" ");
         copy(arg1, arg2);
+    } else if (line.trim().startsWith("mv ")) {
+      const [_, arg1, arg2] = line.trim().split(" ");
+        move(arg1, arg2);
     } else if (line.trim() === ".exit") {
       rl.close();
     } else {
