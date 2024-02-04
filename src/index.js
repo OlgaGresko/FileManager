@@ -11,6 +11,7 @@ import rename from "./fs/rename.js";
 import copy from "./fs/copy.js";
 import move from "./fs/move.js";
 import remove from "./fs/delete.js";
+import calculateHash from "./hash/calcHash.js";
 import capitalizeFirstLetter from "./utils/capitalizeFirstLetter.js";
 import showCurrentWorkingDirectory from "./utils/printCurrentWorkingDirectory.js";
 
@@ -110,6 +111,9 @@ rl.on("line", async (line) => {
         console.log(os.arch());
       }
 
+    } else if (line.trim().startsWith("hash ")) {
+      const [_, arg] = line.trim().split(" ");
+      calculateHash(arg);
     } else if (line.trim() === ".exit") {
       rl.close();
     } else {
