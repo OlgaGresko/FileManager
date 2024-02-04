@@ -1,6 +1,6 @@
 import { writeFile } from "fs/promises";
 import { join } from "path";
-import throwErrorMessage from "../utils/throwErrorMassage.js";
+import throwErrorMessage from "../utils/throwErrorMessage.js";
 
 const create = async (name) => {
     try {

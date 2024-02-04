@@ -1,5 +1,5 @@
 import { rm } from "fs/promises";
-import throwErrorMessage from "../utils/throwErrorMassage.js";
+import throwErrorMessage from "../utils/throwErrorMessage.js";
 
 const remove = async (deletePath) => {
   try {

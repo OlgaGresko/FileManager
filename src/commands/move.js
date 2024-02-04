@@ -1,6 +1,6 @@
 import { createReadStream, createWriteStream, unlink } from "fs";
 import { join } from 'path';
-import throwErrorMessage from "../utils/throwErrorMassage.js";
+import throwErrorMessage from "../utils/throwErrorMessage.js";
 
 const move = (sourcePath, destinationDirectory) => {
   const sourceFileName = sourcePath.split("/").pop();

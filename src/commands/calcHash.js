@@ -1,7 +1,7 @@
 import { createReadStream } from "fs";
 import { Transform, pipeline } from "stream";
 import crypto from "crypto";
-import throwErrorMessage from "../utils/throwErrorMassage.js";
+import throwErrorMessage from "../utils/throwErrorMessage.js";
 
 const calculateHash = async (filePath) => {
   const readable = createReadStream(filePath);

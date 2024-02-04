@@ -1,6 +1,6 @@
 import fs from "fs";
 import { join } from "path";
-import throwErrorMessage from "../utils/throwErrorMassage.js";
+import throwErrorMessage from "../utils/throwErrorMessage.js";
 
 const copy = (sourcePath, destinationDirectory) => {
   const sourceFileName = sourcePath.split("/").pop();
