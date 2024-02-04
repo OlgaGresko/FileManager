@@ -2,22 +2,21 @@ import readline from "readline/promises";
 import os from "os";
 import { join, resolve } from "path";
 
-import parseEnv from "./cli/env.js";
-import list from "./fs/list.js";
-import read from "./fs/read.js";
-import create from "./fs/create.js";
-import rename from "./fs/rename.js";
-import copy from "./fs/copy.js";
-import move from "./fs/move.js";
-import remove from "./fs/delete.js";
-import calculateHash from "./hash/calcHash.js";
-import compress from "./zip/compress.js";
-import decompress from "./zip/decompress.js";
-import capitalizeFirstLetter from "./utils/capitalizeFirstLetter.js";
+import parseEnv from "./utils/env.js";
+import list from "./commands/list.js";
+import read from "./commands/read.js";
+import create from "./commands/create.js";
+import rename from "./commands/rename.js";
+import copy from "./commands/copy.js";
+import move from "./commands/move.js";
+import remove from "./commands/delete.js";
+import calculateHash from "./commands/calcHash.js";
+import compress from "./commands/compress.js";
+import decompress from "./commands/decompress.js";
 import showCurrentWorkingDirectory from "./utils/printCurrentWorkingDirectory.js";
+import greet from "./utils/greet.js";
 
-const name = capitalizeFirstLetter(parseEnv());
-console.log(`Welcome to the File Manager, ${name}`);
+greet();
 
 const rl = readline.createInterface({
   input: process.stdin,
