@@ -12,6 +12,8 @@ import copy from "./fs/copy.js";
 import move from "./fs/move.js";
 import remove from "./fs/delete.js";
 import calculateHash from "./hash/calcHash.js";
+import compress from "./zip/compress.js";
+import decompress from "./zip/decompress.js";
 import capitalizeFirstLetter from "./utils/capitalizeFirstLetter.js";
 import showCurrentWorkingDirectory from "./utils/printCurrentWorkingDirectory.js";
 
@@ -114,6 +116,12 @@ rl.on("line", async (line) => {
     } else if (line.trim().startsWith("hash ")) {
       const [_, arg] = line.trim().split(" ");
       calculateHash(arg);
+    } else if (line.trim().startsWith("compress ")) {
+      const [_, arg1, arg2] = line.trim().split(" ");
+      compress(arg1, arg2);
+    } else if (line.trim().startsWith("decompress ")) {
+      const [_, arg1, arg2] = line.trim().split(" ");
+      decompress(arg1, arg2);
     } else if (line.trim() === ".exit") {
       rl.close();
     } else {
