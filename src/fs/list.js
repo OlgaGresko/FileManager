@@ -1,8 +1,6 @@
 import fs from "fs/promises";
 import { join } from "path";
 
-import throwErrorMessage from "../utils/throwErrorMassage.js";
-
 const list = async () => {
   const dirPath = process.cwd();
   const files = await fs.readdir(dirPath);

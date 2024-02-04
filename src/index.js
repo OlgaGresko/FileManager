@@ -1,11 +1,10 @@
 import readline from "readline/promises";
 import os from "os";
-// import { fileURLToPath } from "url";
-import { dirname, join, resolve } from "path";
+import { join, resolve } from "path";
 
 import parseEnv from "./cli/env.js";
 import list from "./fs/list.js";
-import read from "./streams/read.js";
+import read from "./fs/read.js";
 import create from "./fs/create.js";
 import rename from "./fs/rename.js";
 import copy from "./fs/copy.js";
@@ -16,10 +15,6 @@ import compress from "./zip/compress.js";
 import decompress from "./zip/decompress.js";
 import capitalizeFirstLetter from "./utils/capitalizeFirstLetter.js";
 import showCurrentWorkingDirectory from "./utils/printCurrentWorkingDirectory.js";
-
-// const pathToFile = fileURLToPath(import.meta.url);
-// const dirName = dirname(pathToFile);
-// console.log("dirName", dirName);
 
 const name = capitalizeFirstLetter(parseEnv());
 console.log(`Welcome to the File Manager, ${name}`);
@@ -102,8 +97,12 @@ rl.on("line", async (line) => {
         const allCpus = os.cpus();
         console.log(`Overall amount of CPUS is ${allCpus.length}`);
         allCpus.map((cpu, index) => {
-          console.log(`${index + 1}. CPU model is ${cpu.model}, clock rate (in GHz) is ${cpu.speed / 1000}`)
-        })
+          console.log(
+            `${index + 1}. CPU model is ${cpu.model}, clock rate (in GHz) is ${
+              cpu.speed / 1000
+            }`
+          );
+        });
       } else if (clearedArg === "homedir") {
         console.log(os.homedir());
       } else if (clearedArg === "username") {
@@ -112,7 +111,6 @@ rl.on("line", async (line) => {
       } else if (clearedArg === "architecture") {
         console.log(os.arch());
       }
-
     } else if (line.trim().startsWith("hash ")) {
       const [_, arg] = line.trim().split(" ");
       calculateHash(arg);

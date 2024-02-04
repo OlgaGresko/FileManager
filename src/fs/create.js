@@ -1,10 +1,10 @@
-import { writeFile } from 'fs/promises';
-import { join } from 'path';
-import throwErrorMessage from '../utils/throwErrorMassage.js';
+import { writeFile } from "fs/promises";
+import { join } from "path";
+import throwErrorMessage from "../utils/throwErrorMassage.js";
 
 const create = async (name) => {
     try {
-        await writeFile(join(process.cwd(), name), '', { flag: 'wx' });
+        await writeFile(join(process.cwd(), name), "", { flag: "wx" });
     } catch {
         throwErrorMessage();
     }
