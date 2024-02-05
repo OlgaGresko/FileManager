@@ -1,8 +1,12 @@
 import { createReadStream, createWriteStream, unlink } from "fs";
-import { join } from 'path';
-import throwErrorMessage from "../utils/throwErrorMessage.js";
+import { join } from "path";
 
-const move = (sourcePath, destinationDirectory) => {
+import throwErrorMessage from "../utils/throwErrorMessage.js";
+import parseCommandArgs from "../utils/parseCommandArgs.js";
+
+const move = (line) => {
+  const [sourcePath, destinationDirectory] = parseCommandArgs(line);
+
   const sourceFileName = sourcePath.split("/").pop();
   const destinationPath = join(destinationDirectory, sourceFileName);
 

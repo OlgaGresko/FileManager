@@ -2,8 +2,11 @@ import { createReadStream } from "fs";
 import { Transform, pipeline } from "stream";
 import crypto from "crypto";
 import throwErrorMessage from "../utils/throwErrorMessage.js";
+import parseCommandArgs from "../utils/parseCommandArgs.js";
 
-const calculateHash = async (filePath) => {
+const calculateHash = async (line) => {
+  const [filePath] = parseCommandArgs(line);
+
   const readable = createReadStream(filePath);
 
   const transform = new Transform({
@@ -14,7 +17,7 @@ const calculateHash = async (filePath) => {
     },
   });
 
-  pipeline(readable, transform, err => {
+  pipeline(readable, transform, (err) => {
     if (err) {
       throwErrorMessage();
     }

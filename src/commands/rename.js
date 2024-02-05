@@ -2,8 +2,10 @@ import fs from "fs/promises";
 import path from "path";
 
 import throwErrorMessage from "../utils/throwErrorMessage.js";
+import parseCommandArgs from "../utils/parseCommandArgs.js";
 
-const rename = async (pathToFile, newFileName) => {
+const rename = async (line) => {
+  const [pathToFile, newFileName] = parseCommandArgs(line);
   let oldFilePath;
 
   if (pathToFile.includes("/") || pathToFile.includes("\\")) {

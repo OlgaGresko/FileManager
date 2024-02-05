@@ -1,8 +1,11 @@
 import fs from "fs";
 import { join } from "path";
 import throwErrorMessage from "../utils/throwErrorMessage.js";
+import parseCommandArgs from "../utils/parseCommandArgs.js";
 
-const copy = (sourcePath, destinationDirectory) => {
+const copy = (line) => {
+const [sourcePath, destinationDirectory] = parseCommandArgs(line);
+
   const sourceFileName = sourcePath.split("/").pop();
   const destinationPath = join(destinationDirectory, sourceFileName);
 

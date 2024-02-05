@@ -35,41 +35,29 @@ rl.on("line", async (line) => {
     if (line.trim() === "up") {
       up();
     } else if (line.trim().startsWith("cd ")) {
-      const [_, arg] = line.trim().split(" ");
-      cd(arg);
+      cd(line);
     } else if (line.trim() === "ls") {
       await list();
     } else if (line.trim().startsWith("cat ")) {
-      const [_, arg] = line.trim().split(" ");
-      read(arg);
+      read(line);
     } else if (line.trim().startsWith("add ")) {
-      const [_, arg] = line.trim().split(" ");
-      create(arg);
+      create(line);
     } else if (line.trim().startsWith("rn ")) {
-      const [_, arg1, arg2] = line.trim().split(" ");
-      rename(arg1, arg2);
+      rename(line);
     } else if (line.trim().startsWith("cp ")) {
-      const [_, arg1, arg2] = line.trim().split(" ");
-      copy(arg1, arg2);
+      copy(line);
     } else if (line.trim().startsWith("mv ")) {
-      const [_, arg1, arg2] = line.trim().split(" ");
-      move(arg1, arg2);
+      move(line);
     } else if (line.trim().startsWith("rm ")) {
-      const [_, arg] = line.trim().split(" ");
-      remove(arg);
+      remove(line);
     } else if (line.trim().startsWith("os ")) {
-      const [_, arg] = line.trim().split(" ");
-      const clearedArg = arg.replace("--", "");
-      osCommand(clearedArg);
+      osCommand(line);
     } else if (line.trim().startsWith("hash ")) {
-      const [_, arg] = line.trim().split(" ");
-      calculateHash(arg);
+      calculateHash(line);
     } else if (line.trim().startsWith("compress ")) {
-      const [_, arg1, arg2] = line.trim().split(" ");
-      compress(arg1, arg2);
+      compress(line);
     } else if (line.trim().startsWith("decompress ")) {
-      const [_, arg1, arg2] = line.trim().split(" ");
-      decompress(arg1, arg2);
+      decompress(line);
     } else if (line.trim() === ".exit") {
       rl.close();
     } else {

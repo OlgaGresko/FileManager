@@ -1,6 +1,9 @@
 import os from "os";
 
-const osCommand = (arg) => {
+import parseOsArgs from "../utils/parseOsArgs.js";
+
+const osCommand = (line) => {
+    const arg = parseOsArgs(line);
     if (arg === "EOL") {
         console.log(os.EOL);
       } else if (arg === "cpus") {

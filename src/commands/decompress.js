@@ -1,8 +1,11 @@
 import zlib from "zlib";
 import { join } from "path";
 import { createReadStream, createWriteStream } from "fs";
+import parseCommandArgs from "../utils/parseCommandArgs.js";
 
-const decompress = async (pathToFile, pathToDestination) => {
+const decompress = async (line) => {
+const [pathToFile, pathToDestination] = parseCommandArgs(line);
+  
   const sourceFileName = pathToFile.split("/").pop();
   const destinationFilePath = join(pathToDestination, sourceFileName);
 

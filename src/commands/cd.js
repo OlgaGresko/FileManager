@@ -1,6 +1,9 @@
 import { join } from "path";
 
-const cd = (reportedPath) => {
+import parseCommandArgs from "../utils/parseCommandArgs.js";
+
+const cd = (line) => {
+  const [reportedPath] = parseCommandArgs(line);
   let newPath;
 
   if (reportedPath.includes("/") || reportedPath.includes("\\")) {
